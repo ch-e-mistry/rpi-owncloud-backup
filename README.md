@@ -2,7 +2,7 @@
 
 This is a little bash script to able to **make an offline backup** from a specific folder **to a plugged in disk(s)**.
 
-For my specific case it s a solution to be able to make backup(s) by the customer from a Raspberry Pi used as an Owncloud server.
+For my specific case it s a solution to be able to make backup(s) by the end-user from a Raspberry Pi used as an Owncloud server.
 
 ## Table of contents
 
@@ -12,7 +12,11 @@ For my specific case it s a solution to be able to make backup(s) by the custome
   - [Implementation](#implementation)
     - [Implementation - Manual](#implementation---manual)
     - [Implementation - Automatic (ansible)](#implementation---automatic-ansible)
-  - [Usage:](#usage)
+  - [Usage](#usage)
+    - [What you need](#what-you-need)
+    - [What you expect](#what-you-expect)
+  - [License](#license)
+  - [Author Information](#author-information)
 
 ## Theory Of Operation
 
@@ -55,5 +59,38 @@ root@raspberrypi:/home/pi# crontab -e
 
 ### Implementation - Automatic (ansible)
 
-## Usage:
+The easiest way is to **SSH in** to your Raspberry Pi and **execute the following command as root**:
+
+``` bash
+apt-get install ansible git -y && cd /tmp && git clone https://github.com/ch-e-mistry/rpi-owncloud-backup.git && ansible-playbook ./rpi-owncloud-backup/backup.yaml
+```
+
+It will install git and ansible. If it was done, clone this repository to `/tmp` and run the ansible playbook.
+
+Of course if you have a "central" machine which manages your Raspberry Pi devices, you can run from it as well (or from AWX).
+
+## Usage
+
+### What you need
+
+- Implemented **script in your Raspberry Pi**
+- An **NTFS formatted disk**
+- A **specific file on this disk' root**, described by FILE variable in the script (by default: backup.disk) like:
+![backup.disk](Documentation/file_backup.disk.png)
+
+### What you expect
+
+**Check this youtube video**:
+
 [![youtube_link](http://img.youtube.com/vi/GW3dK1QVUvA/0.jpg)](http://www.youtube.com/watch?v=GW3dK1QVUvA "Raspberry Pi backup")
+
+At the end you should have this / these files based on **COMPRESS** variable's value in the script.
+
+![result](Documentation/result.png)
+## License
+
+MIT
+
+## Author Information
+
+Peter Mikaczo - <petermikaczo@gmail.com>
