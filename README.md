@@ -76,7 +76,7 @@ Of course if you have a "central" machine which manages your Raspberry Pi device
 - Implemented **script in your Raspberry Pi**
 - An **NTFS formatted disk**
 - A **specific file on this disk' root**, described by FILE variable in the script (by default: backup.disk) like:
-![backup.disk](Documentation/file_backup.disk.png)
+![backup.disk](documentation/file_backup.disk.png)
 
 ### What you expect
 
@@ -86,7 +86,8 @@ Of course if you have a "central" machine which manages your Raspberry Pi device
 
 At the end you should have this / these files based on **COMPRESS** variable's value in the script.
 
-![result](Documentation/result.png)
+![result](documentation/result.png)
+
 ## License
 
 MIT
