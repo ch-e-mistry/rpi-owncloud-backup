@@ -1,0 +1,22 @@
+---
+- name: Implement script
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Copy backup script to user's home
+      copy:
+        src: ./backup.sh
+        dest: /root/
+        owner: root
+        group: root
+        mode: 0755
+      delegate_to: localhost
+
+    - name: Implement crontab-entry for root user
+      cron:
+        name: "backup script schedule"
+        minute: "*"
+        hour: "*"
+        user: "root"
+        state: "present"
+        job: '/bin/timeout -s 2 345600 /bin/bash /root/backup.sh >/dev/null 2>&1'
